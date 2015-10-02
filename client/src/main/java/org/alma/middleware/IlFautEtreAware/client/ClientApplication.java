@@ -13,6 +13,8 @@ public class ClientApplication {
         System.out.println("Running client");
         try {
             new Message();
+            UI ui = new UI();
+            ui.setVisible(true);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
