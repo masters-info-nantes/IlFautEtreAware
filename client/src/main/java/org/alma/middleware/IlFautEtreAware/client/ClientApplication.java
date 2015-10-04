@@ -19,6 +19,7 @@ public class ClientApplication {
         System.out.println("Running client");
         IServer server = null;
         try {
+<<<<<<< HEAD
             server = (IServer) Naming.lookup("rmi://" + RMIConfig.SERVER_IP + ":" + RMIConfig.SERVER_PORT + "/" + RMIConfig.APP_NAME + "/server");
         }
         catch (NotBoundException e) {
@@ -39,6 +40,11 @@ public class ClientApplication {
 
         try {
             server.broadcast(new Message("Do","TARDIS!"));
+=======
+            new Message();
+            UI ui = new UI();
+            ui.setVisible(true);
+>>>>>>> origin/master
         } catch (RemoteException e) {
             e.printStackTrace();
         }
