@@ -1,9 +1,8 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
-import org.alma.middleware.IlFautEtreAware.common.Message;
+import org.alma.middleware.IlFautEtreAware.common.IServer;
 import org.alma.middleware.IlFautEtreAware.common.RMIConfig;
 
-import javax.management.remote.rmi.RMIServer;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -19,7 +18,7 @@ public class ServerApplication {
         System.out.println("Running server");
 
         try {
-            Server server = new Server();
+            IServer server = new Server();
 
             // create a Security Manager that allow everything
             if (System.getSecurityManager() == null) {
@@ -33,7 +32,7 @@ public class ServerApplication {
 
             LocateRegistry.createRegistry(RMIConfig.SERVER_PORT);
 
-            String url = "rmi://" + RMIConfig.SERVER_IP +":" + RMIConfig.SERVER_PORT + "/" + RMIConfig.APP_NAME + "/server";
+            String url = "rmi://" + RMIConfig.SERVER_IP +":" + RMIConfig.SERVER_PORT + "/" + RMIConfig.APP_NAME;
             try {
                 Naming.rebind(url, server);
             }

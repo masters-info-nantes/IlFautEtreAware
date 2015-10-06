@@ -8,7 +8,8 @@ import java.util.List;
  * Created by Maxime on 02/10/2015.
  */
 public interface IServer extends Remote {
-
-    public List<Message> getMessages() throws RemoteException;
-    public void broadcast(Message message) throws RemoteException;
+    public List<String> getTopics() throws RemoteException;
+    public ITopic topicSubscribe(IClient client, String name) throws RemoteException;
+    public void topicUnsubscribe(IClient client, String name) throws RemoteException;
+    public void createTopic (IClient client, String name) throws RemoteException;
 }
