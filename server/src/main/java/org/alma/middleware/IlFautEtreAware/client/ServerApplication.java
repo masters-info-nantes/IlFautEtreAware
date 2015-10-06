@@ -16,7 +16,7 @@ import java.security.Permission;
 public class ServerApplication {
 
     public static void main(String [] args) {
-        System.out.println("Running client");
+        System.out.println("Running server");
 
         try {
             Server server = new Server();

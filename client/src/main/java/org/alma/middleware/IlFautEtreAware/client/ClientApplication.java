@@ -39,7 +39,6 @@ public class ClientApplication {
 
         try {
             server.broadcast(new Message("Do","TARDIS!"));
-            new Message();
             UI ui = new UI();
             ui.setVisible(true);
         } catch (RemoteException e) {
