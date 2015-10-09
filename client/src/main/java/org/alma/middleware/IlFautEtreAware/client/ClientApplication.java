@@ -19,6 +19,12 @@ public class ClientApplication {
         ArrayList<String> subscribeTopic = new ArrayList<String>();
 
         System.out.println("Running client");
+        //Ajout de l'UI
+        //TODO connect ui functions to base functions
+        //TODO add jfx jar in resources for making css files available
+        Connection con = new Connection();
+        con.launchApp(args);
+        
         IServer server = null;
         IClient client = new Client();
         try {
