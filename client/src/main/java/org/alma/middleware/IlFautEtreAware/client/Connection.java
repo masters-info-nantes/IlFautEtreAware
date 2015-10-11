@@ -1,4 +1,4 @@
-package org.alma.middleware.IlFautEtreAware.client;
+package application;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -24,24 +24,24 @@ import javafx.util.Duration;
 
 public class Connection extends Application {
 
-    public void launchApp(String [] args) {
+    public static void main(String[] args) {
         launch(args);
     }
     
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Connection - Faut Ãªtre aware");
+        primaryStage.setTitle("Connection - Faut être aware");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 300);
-        System.out.println(Connection.class.getResource("application.css"));
-        //scene.getStylesheets().add(Connection.class.getResource("application.css").toExternalForm());
+        scene.getStylesheets().add
+        (Connection.class.getResource("application.css").toExternalForm());
 
-        Text scenetitle = new Text("Bienvenue Ã  toi, Ã  moi, Ã  tous");
+        Text scenetitle = new Text("Bienvenue à toi, à moi, à tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 
@@ -85,7 +85,6 @@ public class Connection extends Application {
 
         	@Override
             public void handle(ActionEvent e) {
-                actiontarget.setText("Sign in button pressed");
                 if (userTextField.getText().equals("")) {errorWindow();}
                 else openNewWindow();
             }
@@ -106,10 +105,7 @@ public class Connection extends Application {
         primaryStage.setResizable(false);     
         primaryStage.show();
         
-        /*Fermeture d'une fenÃªtre aprÃ¨s un dÃ©compte
-        PauseTransition pause = new PauseTransition(Duration.seconds(5));
-        pause.setOnFinished(e -> primaryStage.hide());
-        pause.play();*/
+        
        
     }
     

@@ -1,5 +1,6 @@
 package application;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,9 +20,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-public class error extends Application {
-
+public class errorTopic extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -32,50 +33,32 @@ public class error extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-        Scene scene = new Scene(grid, 480, 260);
+        Scene scene = new Scene(grid, 380, 210);
         scene.getStylesheets().add
-        (error.class.getResource("error.css").toExternalForm());
+        (errorTopic.class.getResource("errorTopic.css").toExternalForm());
 
-        Text scenetitle = new Text("Rentre un nom d'utilisateur, sinon");
+        Text scenetitle = new Text("Choisis une chaîne\npour accéder au tchat, sinon");
+        Text redir = new Text("fermeture automatique");
+
+        scenetitle.setStyle("-fx-text-alignment:center");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        redir.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
-
-        
-
-        Button btn = new Button("Retour");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 3);
+        grid.add(redir, 2, 2);
+        //Fermeture d'une fenêtre après un décompte
+        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        pause.setOnFinished(e -> primaryStage.hide());
+        pause.play();
 
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 4);
         
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                actiontarget.setText("Sign in button pressed");
-                openNewWindow();
-            }
-            public void openNewWindow() {
-            	Connection connect = new Connection();
-            	connect.start(primaryStage);
-            }
-        });
-        btn.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
-            @Override
-            public void handle(KeyEvent ke)
-            {
-            	Connection connect = new Connection();
-            	connect.start(primaryStage);
-                }
-            
-        });
+       
+       
         
 
         scenetitle.setId("welcome-text");
+        redir.setId("redir-text");
         actiontarget.setId("actiontarget");
         primaryStage.setScene(scene); 
         primaryStage.setResizable(false);     
