@@ -1,15 +1,15 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
-import org.alma.middleware.IlFautEtreAware.common.*;
-
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.alma.middleware.IlFautEtreAware.common.IClient;
+import org.alma.middleware.IlFautEtreAware.common.IServer;
+import org.alma.middleware.IlFautEtreAware.common.ITopic;
 
 /**
  * Created by Maxime on 02/10/2015.
@@ -42,6 +42,7 @@ public class Server extends UnicastRemoteObject implements IServer, Serializable
     public ITopic topicSubscribe(IClient client, ITopic t) throws RemoteException {
         Topic topic = (Topic) topics.get(t.getName());
         topic.addClient(client);
+        client.addSubscribedTopic(t);
         System.out.println("[Server] Subscribe topic "+t.getName()+" : "+client.getName());
         return topic;
     }
@@ -49,6 +50,7 @@ public class Server extends UnicastRemoteObject implements IServer, Serializable
     public void topicUnsubscribe(IClient client, ITopic t) throws RemoteException {
         Topic topic = (Topic)topics.get(t.getName());
         topic.removeClient(client);
+        client.removeSubscribedTopic(t);
         System.out.println("[Server] Unsubscribe topic "+t.getName()+" : "+client.getName());
     }
 

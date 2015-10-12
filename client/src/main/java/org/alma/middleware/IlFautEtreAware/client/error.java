@@ -21,7 +21,7 @@ public class error extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Erreur - Faut �tre aware");
+        primaryStage.setTitle("Erreur - Faut être aware");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);

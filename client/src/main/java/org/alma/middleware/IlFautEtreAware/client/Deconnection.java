@@ -18,7 +18,7 @@ public class Deconnection extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("D�connection - Faut �tre aware");
+        primaryStage.setTitle("Déconnection - Faut être aware");
         Stage secondStage = new Stage();
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -29,7 +29,7 @@ public class Deconnection extends Application {
         scene.getStylesheets().add
         (Deconnection.class.getResource("css/application.css").toExternalForm());
 
-        Text scenetitle = new Text("A bient�t mon ami\n et sois toujours aware");
+        Text scenetitle = new Text("A bientôt mon ami\n et sois toujours aware");
         scenetitle.setStyle("-fx-text-alignement: center");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);

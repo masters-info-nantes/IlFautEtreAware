@@ -1,15 +1,13 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
-import org.alma.middleware.IlFautEtreAware.common.IClient;
-import org.alma.middleware.IlFautEtreAware.common.IServer;
-import org.alma.middleware.IlFautEtreAware.common.ITopic;
-import org.alma.middleware.IlFautEtreAware.common.Message;
-
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import org.alma.middleware.IlFautEtreAware.common.IClient;
+import org.alma.middleware.IlFautEtreAware.common.ITopic;
+import org.alma.middleware.IlFautEtreAware.common.Message;
 
 /**
  * Created by Maxime on 06/10/2015.

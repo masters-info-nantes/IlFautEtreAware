@@ -17,7 +17,7 @@ public class errorNewTopic extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Erreur - Faut �tre aware");
+        primaryStage.setTitle("Erreur - Faut être aware");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -27,7 +27,7 @@ public class errorNewTopic extends Application {
         scene.getStylesheets().add
         (errorNewTopic.class.getResource("css/errorTopic.css").toExternalForm());
 
-        Text scenetitle = new Text("Rentre un nom de tchat\npour cr�er un tchat, sinon");
+        Text scenetitle = new Text("Rentre un nom de tchat\npour créer un tchat, sinon");
         Text redir = new Text("fermeture automatique");
 
         scenetitle.setStyle("-fx-text-alignment:center");

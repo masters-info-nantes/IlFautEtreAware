@@ -1,8 +1,6 @@
 package org.alma.middleware.IlFautEtreAware.common;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Created by Maxime on 02/10/2015.
@@ -33,5 +31,9 @@ public class Message implements Serializable {
 
     public void setMessage(String message){
         this.message = message;
+    }
+    
+    public String toString(){
+    	return author+": "+message;
     }
 }

@@ -4,7 +4,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.alma.middleware.IlFautEtreAware.common.*;
+import org.alma.middleware.IlFautEtreAware.common.IServer;
+import org.alma.middleware.IlFautEtreAware.common.ITopic;
+import org.alma.middleware.IlFautEtreAware.common.Message;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -40,7 +42,8 @@ public class Forum extends Application {
     
     private Client client;
     private IServer server;
-
+    private ITopic selectedTopic;
+    
     public void start(Stage primaryStage) {
  
     	GridPane grid = new GridPane();
@@ -70,18 +73,16 @@ public class Forum extends Application {
             }
             public void Deconnexion(){
             	Deconnection connect = new Deconnection();
-            	connect.start(primaryStage);
-        		
+            	connect.start(primaryStage);		
         	}
         });
-        
         
         
         //Liste des abonnements
         Text TopicsIns = new Text("Liste des abonnements :");
         
         ListView<String> ListInscrits = new ListView<String>();
-        ObservableList<String> items = FXCollections.observableArrayList ();
+        ObservableList<String> items = FXCollections.observableArrayList (client.getSubscribedTopic());
         ListInscrits.setItems(items);
         
         
@@ -107,6 +108,7 @@ public class Forum extends Application {
                     	if (ListInscrits.getSelectionModel().selectedItemProperty().equals("")){	
                     	  channelName = new Text(Channel + " :");
                     	  output = new TextArea();
+                    	  getTopicMessages();
                           input = new TextField();
                           
                           btnEnvoyer = new Button();
@@ -116,9 +118,7 @@ public class Forum extends Application {
                           	 
                               @Override
                               public void handle(ActionEvent event) {
-                            	  String text = input.getText();
-                            	  output.appendText(Identifiants+": "+text + newline);
-                            	  input.selectAll();
+                            	  sendMessage();
                               }
                          
                           });
@@ -129,9 +129,7 @@ public class Forum extends Application {
                               {
                                   if (ke.getCode().equals(KeyCode.ENTER))
                                   {
-                                	  String text = input.getText();
-                                	  output.appendText(Identifiants+": "+text + newline);
-                                	  input.selectAll();
+                                	  sendMessage();
                                   }
                               }
                           });
@@ -143,6 +141,7 @@ public class Forum extends Application {
                     		getTopic(ListInscrits.getSelectionModel().getSelectedItem());
                     		channelName = new Text(Channel + " :");
                       	  	output = new TextArea();
+                      	  	getTopicMessages();
                             input = new TextField();
                             btnEnvoyer = new Button();
                             btnEnvoyer.setText("Envoyer\nle message");
@@ -151,9 +150,7 @@ public class Forum extends Application {
                             	 
                                 @Override
                                 public void handle(ActionEvent event) {
-                                	String text = input.getText();
-                      			    output.appendText(Identifiants+": "+text + newline);
-                    			    input.selectAll();
+                                	sendMessage();
                                 }
                            
                             });
@@ -164,9 +161,7 @@ public class Forum extends Application {
                                 {
                                     if (ke.getCode().equals(KeyCode.ENTER))
                                     {
-                                    	String text = input.getText();
-                          			    output.appendText(Identifiants+": "+text + newline);
-                        			    input.selectAll();
+                                    	sendMessage();
                                     }
                                 }
                             });
@@ -198,7 +193,6 @@ public class Forum extends Application {
        
         Text TopicsDispos = new Text("Topics disponibles :");
        
-        
         ListView<String> ListDispo = new ListView<String>();
         ObservableList<String> items2 =FXCollections.observableArrayList (allTopicNames);
         ListDispo.setItems(items2);
@@ -237,6 +231,7 @@ public class Forum extends Application {
 				}
             }
           });
+        
         btnNew.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
@@ -265,24 +260,20 @@ public class Forum extends Application {
                                     @Override
                                     public void handle(ActionEvent event) {
                                     	String NewTopic = Topic.getText();
-                                            if (NewTopic.equals("")) {
-
-                                    			errorNewTopic error = new errorNewTopic();
-                                               	error.start(secondStage);
-                                            	
-                                            }
-                                            else {
-                                            	ListInscrits.getSelectionModel().clearSelection();
-                                            	items.add(NewTopic);
-                                            	try {
-													server.createTopic(client, NewTopic);
-												} catch (RemoteException e) {
-													// TODO Auto-generated catch block
-													e.printStackTrace();
-												}
-                                            	dialog.close();
-                                            }
-                                    	
+                                        if (NewTopic.equals("")) {
+                                			errorNewTopic error = new errorNewTopic();
+                                           	error.start(secondStage);       	
+                                        } else {
+                                        	ListInscrits.getSelectionModel().clearSelection();
+                                        	items.add(NewTopic);
+                                        	try {
+												server.createTopic(client, NewTopic);
+											} catch (RemoteException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+                                        	dialog.close();
+                                        }
                                     }
                                 });
                         Topic.setOnKeyPressed(new EventHandler<KeyEvent>()
@@ -292,27 +283,21 @@ public class Forum extends Application {
                             {
                                 if (ke.getCode().equals(KeyCode.ENTER))
                                 {
-                                	
-                                     	String NewTopic = Topic.getText();
-                                             if (NewTopic.equals("")) {
-
-                                     			errorNewTopic error = new errorNewTopic();
-                                                error.start(secondStage);
-                                             	
-                                             }
-                                             else {
-                                             	ListInscrits.getSelectionModel().clearSelection();
-                                             	items.add(NewTopic);
-                                             	try {
-													server.createTopic(client, NewTopic);
-												} catch (RemoteException e) {
-													// TODO Auto-generated catch block
-													e.printStackTrace();
-												}
-                                             	dialog.close();
-                                             }
-                                     	
-                                     
+                                     String NewTopic = Topic.getText();
+                                     if (NewTopic.equals("")) {
+                             			errorNewTopic error = new errorNewTopic();
+                                        error.start(secondStage);
+                                     } else {
+                                     	ListInscrits.getSelectionModel().clearSelection();
+                                     	items.add(NewTopic);
+                                     	try {
+											server.createTopic(client, NewTopic);
+										} catch (RemoteException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+                                     	dialog.close();
+                                     } 
                                 }
                             }
                         });
@@ -335,13 +320,22 @@ public class Forum extends Application {
         grid.add(btnInscri, 0,16);
         
     }
+    
     public void getID (String ID) {
     	Identifiants = ID;
     	System.out.println(Identifiants);
     }
+    
     public void getTopic (String Name){
     	Channel = Name;
+    	try {
+			selectedTopic = server.getTopic(Name);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
+    
     public void getClient(Client c){
     	client = c;
     	try {
@@ -351,7 +345,34 @@ public class Forum extends Application {
 			e.printStackTrace();
 		}
     }
+    
     public void getServer(IServer s){
     	server = s;
+    }
+    
+    public void getTopicMessages(){
+    	ArrayList<Message> messagesTopic;
+		try {
+			messagesTopic = selectedTopic.getMessages();
+			for(Message m : messagesTopic){
+				output.appendText(m.toString()+ newline);
+		  	}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    
+    }
+    
+    public void sendMessage(){
+    	String text = input.getText();
+  	  	try {
+      		Message m = new Message(Identifiants,text);
+			selectedTopic.broadcast(m);
+      		output.appendText(m.toString()+ newline);
+      	} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+      	}
+  	  	input.selectAll();
     }
 }

@@ -129,8 +129,6 @@ public class Connection extends Application {
 			server.login(client);
 			server.createTopic(client, "Mythologie");
 			server.createTopic(client, "Litterature Française");
-	        server.topicSubscribe(client, server.getTopic("Mythologie"));
-	        server.topicSubscribe(client, server.getTopic("Litterature Française"));
 	        server.createTopic(client, "Génie logiciel");
 	        server.createTopic(client, "MDE");
 

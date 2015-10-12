@@ -3,6 +3,7 @@ package org.alma.middleware.IlFautEtreAware.client;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import org.alma.middleware.IlFautEtreAware.common.IClient;
 import org.alma.middleware.IlFautEtreAware.common.ITopic;
@@ -14,7 +15,8 @@ import org.alma.middleware.IlFautEtreAware.common.Message;
 public class Client extends UnicastRemoteObject implements IClient, Serializable {
 
     private String name = "";
-
+    private ArrayList<String> subscribedTopic = new ArrayList<String>();
+    
     public Client() throws RemoteException {
         super();
     }
@@ -37,5 +39,18 @@ public class Client extends UnicastRemoteObject implements IClient, Serializable
     public void setName(String name) {
         this.name = name;
     }
+
+	public ArrayList<String> getSubscribedTopic() {
+		return subscribedTopic;
+	}
+
+	@Override
+	public void addSubscribedTopic(ITopic topic) throws RemoteException {
+		subscribedTopic.add(topic.getName());
+	}
+	@Override
+	public void removeSubscribedTopic(ITopic topic) throws RemoteException {
+		subscribedTopic.remove(topic.getName());
+	}
 
 }

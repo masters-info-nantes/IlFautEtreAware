@@ -1,13 +1,13 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
-import org.alma.middleware.IlFautEtreAware.common.IServer;
-import org.alma.middleware.IlFautEtreAware.common.RMIConfig;
-
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.security.Permission;
+
+import org.alma.middleware.IlFautEtreAware.common.IServer;
+import org.alma.middleware.IlFautEtreAware.common.RMIConfig;
 
 /**
  * Created by Maxime on 02/10/2015.
