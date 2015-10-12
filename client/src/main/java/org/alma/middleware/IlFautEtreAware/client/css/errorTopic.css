@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .root {
--fx-background-image: url("jcvd2.png");
+-fx-background-image: url("../images/jcvd3.gif");
 }
 .label {
     -fx-font-size: 12px;
@@ -12,10 +12,11 @@
    -fx-font-size:20px;
    -fx-font-family: "Arial Black";
    -fx-fill: white;
+   -fx-text-alignment:center;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
-#Topic {
-   -fx-font-size:14px;
+#redir-text {
+   -fx-font-size:15px;
    -fx-font-family: "Arial Black";
    -fx-fill: white;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
@@ -34,8 +35,4 @@
 }
 .button:hover {
     -fx-background-color: linear-gradient(#FF8C00, #FF8C00);
-}
-#ListInscrits{
-
-	
 }

@@ -29,7 +29,7 @@ public class error extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 260);
         scene.getStylesheets().add
-        (error.class.getResource("error.css").toExternalForm());
+        (error.class.getResource("css/error.css").toExternalForm());
 
         Text scenetitle = new Text("Rentre un nom d'utilisateur, sinon");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));

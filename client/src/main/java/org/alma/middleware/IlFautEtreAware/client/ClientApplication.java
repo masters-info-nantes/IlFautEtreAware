@@ -21,11 +21,6 @@ public class ClientApplication {
         ArrayList<String> subscribeTopic = new ArrayList<String>();
 
         System.out.println("Running client");
-        //Ajout de l'UI
-        //TODO connect ui functions to base functions
-        //TODO add jfx jar in resources for making css files available
-        //Connection con = new Connection();
-        //con.launchApp(args);
         
         IServer server = null;
         Client client = new Client();
@@ -41,6 +36,8 @@ public class ClientApplication {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        Connection con = new Connection();
+        con.launchApp(args);
         String userName = "user"+(int)(Math.random()*100);
         client.setName(userName);
         server.login(client);

@@ -30,7 +30,7 @@ public class Connection extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Connection - Faut �tre aware");
+        primaryStage.setTitle("Connection - Faut être aware");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -38,9 +38,9 @@ public class Connection extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 300);
         scene.getStylesheets().add
-        (Connection.class.getResource("application.css").toExternalForm());
+        (Connection.class.getResource("css/application.css").toExternalForm());
 
-        Text scenetitle = new Text("Bienvenue � toi, � moi, � tous");
+        Text scenetitle = new Text("Bienvenue à toi, à moi, à tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 

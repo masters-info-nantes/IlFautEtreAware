@@ -42,18 +42,18 @@ public class Forum extends Application {
         Scene scene = new Scene(grid, 1100, 600);
         Stage secondStage = new Stage();
 
-        primaryStage.setTitle("Forum - Faut �tre aware");
+        primaryStage.setTitle("Forum - Faut être aware");
         primaryStage.setScene(scene);
         scene.getStylesheets().add
-        	(Connection.class.getResource("JCVD.css").toExternalForm());
+        	(Connection.class.getResource("css/JCVD.css").toExternalForm());
         primaryStage.show();
         
-        Text identifiants = new Text("Bonjour � toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
+        Text identifiants = new Text("Bonjour à toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
         identifiants.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         identifiants.setId("welcome-text");
         
         Button btnDeco = new Button();
-        btnDeco.setText("D�connexion");
+        btnDeco.setText("Déconnexion");
         btnDeco.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -71,13 +71,13 @@ public class Forum extends Application {
         Text TopicsIns = new Text("Liste des abonnements :");
         
         ListView<String> ListInscrits = new ListView<String>();
-        ObservableList<String> items =FXCollections.observableArrayList ("Mythologie","Litterature Fran�aise"
+        ObservableList<String> items =FXCollections.observableArrayList ("Mythologie","Litterature Française"
             );
         ListInscrits.setItems(items);
         
         
         Button btnNew = new Button();
-        btnNew.setText("Nouveau th�me");
+        btnNew.setText("Nouveau thème");
         
         Button btnGo = new Button();
         btnGo.setText("Aller au tchat");
@@ -184,7 +184,7 @@ public class Forum extends Application {
         
         
         ListView<String> ListDispo = new ListView<String>();
-        ObservableList<String> items2 =FXCollections.observableArrayList ("G�nie Logiciel","MDE");
+        ObservableList<String> items2 =FXCollections.observableArrayList ("Génie Logiciel","MDE");
         ListDispo.setItems(items2);
         
         
@@ -201,7 +201,7 @@ public class Forum extends Application {
           });
 
         Button btnDisabon = new Button();
-        btnDisabon.setText("Se d�sabonner");
+        btnDisabon.setText("Se désabonner");
         btnDisabon.setOnAction((ActionEvent event) -> {
             String potential = ListInscrits.getSelectionModel()
                 .getSelectedItem();
@@ -219,7 +219,7 @@ public class Forum extends Application {
                         dialog.initModality(Modality.APPLICATION_MODAL);
                         dialog.initOwner(primaryStage);
                         VBox dialogVbox = new VBox(20);
-                        dialog.setTitle("Nouveau tchat - Faut �tre aware");
+                        dialog.setTitle("Nouveau tchat - Faut être aware");
                         Text Title = new Text("Choisissez un titre pour le nouveau tchat:");
                         dialogVbox.getChildren().add(Title);
                         TextField Topic = new TextField();
@@ -227,7 +227,7 @@ public class Forum extends Application {
                         dialogVbox.setPadding(new Insets(10,100,10,10)); 
                         Button btnNT = new Button();
                         dialogVbox.getChildren().add(btnNT);
-                        btnNT.setText("Cr�er nouveau tchat");
+                        btnNT.setText("Créer nouveau tchat");
                         Scene dialogScene = new Scene(dialogVbox, 400, 150);
                         dialog.setScene(dialogScene);
                         Title.setId("Title");
