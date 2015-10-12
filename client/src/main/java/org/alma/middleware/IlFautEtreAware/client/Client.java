@@ -1,6 +1,7 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
 import org.alma.middleware.IlFautEtreAware.common.IClient;
+import org.alma.middleware.IlFautEtreAware.common.ITopic;
 import org.alma.middleware.IlFautEtreAware.common.Message;
 
 import java.io.Serializable;
@@ -12,13 +13,29 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class Client extends UnicastRemoteObject implements IClient, Serializable {
 
+    private String name = "";
+
     public Client() throws RemoteException {
         super();
     }
 
     @Override
     public void newMessage(Message message, String topic) throws RemoteException {
-        System.out.println("["+topic+"]["+message.getAuthor()+"] : "+message.getMessage());
+        System.out.println("[" + topic + "][" + message.getAuthor() + "] : " + message.getMessage());
+    }
+
+    @Override
+    public void newTopic(ITopic topic) throws RemoteException {
+        System.out.println("["+topic.getName()+"] : has created");
+    }
+
+    @Override
+    public String getName() throws RemoteException {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

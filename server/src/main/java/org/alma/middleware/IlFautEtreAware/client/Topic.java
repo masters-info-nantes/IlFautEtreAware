@@ -25,6 +25,11 @@ public class Topic extends UnicastRemoteObject implements Serializable, ITopic {
     private ArrayList<Message> messages = new ArrayList<Message>();
     private ArrayList<IClient> clients = new ArrayList<IClient>();
 
+    @Override
+    public String getName() throws RemoteException {
+        return topicName;
+    }
+
     public void broadcast(Message message) throws RemoteException {
         System.out.println("broadcast [" + message.getAuthor() + " : " + message.getMessage() + "]");
         messages.add(message);

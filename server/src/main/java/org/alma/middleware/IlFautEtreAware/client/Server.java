@@ -16,42 +16,47 @@ import java.util.List;
  */
 public class Server extends UnicastRemoteObject implements IServer, Serializable {
 
-    private HashMap<String, Topic> topics = new HashMap<String, Topic>();
+    private HashMap<String, ITopic> topics = new HashMap<String, ITopic>();
+    private ArrayList<IClient> clients = new ArrayList<IClient>();
 
     public Server() throws RemoteException {
         super();
     }
 
-    public List<String> getTopics() throws RemoteException {
-        return new ArrayList<String>(topics.keySet());
+    public void login(IClient client) {
+        clients.add(client);
     }
 
-    public ITopic topicSubscribe(IClient client, String name) throws RemoteException {
-        Topic topic = topics.get(name);
+    public List<ITopic> getTopics() throws RemoteException {
+        ArrayList<ITopic> t = new ArrayList<ITopic>();
+        for(ITopic topic : topics.values()) {
+            t.add(topic);
+        }
+        return t;
+    }
+
+    public ITopic getTopic(String topicName) throws RemoteException {
+        return topics.get(topicName);
+    }
+
+    public ITopic topicSubscribe(IClient client, ITopic t) throws RemoteException {
+        Topic topic = (Topic) topics.get(t.getName());
         topic.addClient(client);
-        System.out.println("[Server] Subscribe");
+        System.out.println("[Server] Subscribe topic "+t.getName()+" : "+client.getName());
         return topic;
     }
 
-    public void topicUnsubscribe(IClient client, String name) throws RemoteException {
-        Topic topic = topics.get(name);
+    public void topicUnsubscribe(IClient client, ITopic t) throws RemoteException {
+        Topic topic = (Topic)topics.get(t.getName());
         topic.removeClient(client);
-        System.out.println("[Server] Unsubscribe");
+        System.out.println("[Server] Unsubscribe topic "+t.getName()+" : "+client.getName());
     }
 
     public void createTopic (IClient client, String name) throws RemoteException {
         Topic t = new Topic(name);
         topics.put(name, t);
-
-        String url = "rmi://" + RMIConfig.SERVER_IP +":" + RMIConfig.SERVER_PORT + "/" + RMIConfig.APP_NAME + "/"+name;
-        try {
-            Naming.rebind(url, t);
-        }
-        catch (MalformedURLException e) {
-            System.err.println("RMI: Object URL malformed");
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        for(IClient c : clients) {
+            c.newTopic(t);
         }
         System.out.println("[Server] New topic \""+name+"\" created");
     }
