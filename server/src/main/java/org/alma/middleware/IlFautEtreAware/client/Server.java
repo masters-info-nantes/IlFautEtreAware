@@ -56,11 +56,13 @@ public class Server extends UnicastRemoteObject implements IServer, Serializable
 
     public void createTopic (IClient client, String name) throws RemoteException {
         Topic t = new Topic(name);
-        topics.put(name, t);
-        for(IClient c : clients) {
-            c.newTopic(t);
+        if(!topics.containsKey(name)){
+        	topics.put(name, t);
+        	for(IClient c : clients) {
+                c.newTopic(t);
+            }
+            System.out.println("[Server] New topic \""+name+"\" created");
         }
-        System.out.println("[Server] New topic \""+name+"\" created");
     }
 
 }
