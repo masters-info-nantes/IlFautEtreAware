@@ -18,13 +18,13 @@ import org.alma.middleware.IlFautEtreAware.common.RMIConfig;
 public class ClientApplication {
 
     public static void main(String [] args) throws RemoteException {
-        ArrayList<String> subscribeTopic = new ArrayList<String>();
+        //ArrayList<String> subscribeTopic = new ArrayList<String>();
 
         System.out.println("Running client");
         
-        IServer server = null;
-        Client client = new Client();
-        try {
+        //IServer server = null;
+        //Client client = new Client();
+        /*try {
             server = (IServer) Naming.lookup("rmi://" + RMIConfig.SERVER_IP + ":" + RMIConfig.SERVER_PORT + "/" + RMIConfig.APP_NAME);
         }
         catch (NotBoundException e) {
@@ -35,18 +35,19 @@ public class ClientApplication {
             e.printStackTrace();
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
+        }*/
         Connection con = new Connection();
         con.launchApp(args);
-        String userName = "user"+(int)(Math.random()*100);
-        client.setName(userName);
-        server.login(client);
-        String topicName = "test"+(int)(Math.random()*100);
-        server.createTopic(client, topicName);
+        
+        //String userName = "user"+(int)(Math.random()*100);
+        //client.setName(userName);
+        //server.login(client);
+        //String topicName = "test"+(int)(Math.random()*100);
+        //server.createTopic(client, topicName);
         //server.topicSubscribe(client, topicName);
-        subscribeTopic.add(topicName);
+        //subscribeTopic.add(topicName);
 
-        for(int i = 0; i<server.getTopics().size(); i++ ) {
+        /*for(int i = 0; i<server.getTopics().size(); i++ ) {
             System.out.println("["+i+"] "+server.getTopics().get(i).getName());
         }
         Scanner scanner = new Scanner(System.in);
@@ -66,7 +67,7 @@ public class ClientApplication {
         }
         topic.broadcast(new Message(client.getName(),"hello"));
 
-
+*/
         while(true);
     }
 

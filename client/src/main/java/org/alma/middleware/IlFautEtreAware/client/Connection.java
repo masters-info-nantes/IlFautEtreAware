@@ -1,5 +1,13 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+import org.alma.middleware.IlFautEtreAware.common.IServer;
+import org.alma.middleware.IlFautEtreAware.common.RMIConfig;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,12 +28,14 @@ import javafx.stage.Stage;
 
 public class Connection extends Application {
 
-    /*public static void main(String[] args) {
-        launch(args);
-    }*/
+	private Client client;
+	private IServer server = null;
+	private String username = "";
+	
 	public void launchApp(String[] args){
 		launch(args);
 	}
+	
     
     @Override
     public void start(Stage primaryStage) {
@@ -66,15 +76,11 @@ public class Connection extends Application {
             {
                 if (ke.getCode().equals(KeyCode.ENTER))
                 {
-                	if (userTextField.getText().equals("")){ 
-                		error error = new error();
-                		error.start(primaryStage);
-                	}
-                	else {
-                		Forum test = new Forum();
-                    	test.getID(userTextField.getText());
-                    	test.start(primaryStage);                		
-                	}
+                	if (userTextField.getText().equals("")) {
+                    	errorWindow(primaryStage);
+                    }else{
+    					openNewWindow(userTextField,primaryStage);
+                    }
                 }
             }
         });
@@ -84,28 +90,58 @@ public class Connection extends Application {
 
         	@Override
             public void handle(ActionEvent e) {
-                if (userTextField.getText().equals("")) {errorWindow();}
-                else openNewWindow();
+                if (userTextField.getText().equals("")) {
+                	errorWindow(primaryStage);
+                }else{
+					openNewWindow(userTextField,primaryStage);
+                }
             }
-            public void openNewWindow() {
-            	Forum test = new Forum();
-            	test.getID(userTextField.getText());
-            	test.start(primaryStage);
-            }
-            public void errorWindow() {
-               	error error = new error();
-               	error.start(primaryStage);
-               }
-     });
+            
+        });
 
         scenetitle.setId("welcome-text");
         actiontarget.setId("actiontarget");
         primaryStage.setScene(scene); 
         primaryStage.setResizable(false);     
         primaryStage.show();
-        
-        
-       
+
     }
+    
+    public void openNewWindow(TextField tf, Stage stage){
+    	username = tf.getText();
+    	try {
+			client = new Client();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+    	client.setName(username);
+    	try {
+            server = (IServer) Naming.lookup("rmi://" + RMIConfig.SERVER_IP + ":" + RMIConfig.SERVER_PORT + "/" + RMIConfig.APP_NAME);
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            System.err.println("RMI: Retrieve malformed URL");
+            e.printStackTrace();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    	try {
+			server.login(client);
+			Forum forum = new Forum();
+			//forum.getID(username);
+			forum.getClient(client);
+			forum.getServer(server);
+			forum.start(stage);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    public void errorWindow(Stage stage) {
+       	error error = new error();
+       	error.start(stage);
+    }
+    
     
 }

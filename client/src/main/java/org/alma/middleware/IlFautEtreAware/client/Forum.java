@@ -1,5 +1,9 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
+import java.rmi.RemoteException;
+
+import org.alma.middleware.IlFautEtreAware.common.IServer;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +35,9 @@ public class Forum extends Application {
     String Identifiants;
     String Channel;
     Text channelName = new Text();
+    
+    private Client client;
+    private IServer server;
 
     public void start(Stage primaryStage) {
  
@@ -44,8 +51,7 @@ public class Forum extends Application {
 
         primaryStage.setTitle("Forum - Faut être aware");
         primaryStage.setScene(scene);
-        scene.getStylesheets().add
-        	(Connection.class.getResource("css/JCVD.css").toExternalForm());
+        scene.getStylesheets().add(Connection.class.getResource("css/JCVD.css").toExternalForm());
         primaryStage.show();
         
         Text identifiants = new Text("Bonjour à toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
@@ -71,8 +77,7 @@ public class Forum extends Application {
         Text TopicsIns = new Text("Liste des abonnements :");
         
         ListView<String> ListInscrits = new ListView<String>();
-        ObservableList<String> items =FXCollections.observableArrayList ("Mythologie","Litterature Française"
-            );
+        ObservableList<String> items =FXCollections.observableArrayList ("Mythologie","Litterature Française");
         ListInscrits.setItems(items);
         
         
@@ -304,5 +309,17 @@ public class Forum extends Application {
     }
     public void getTopic (String Name){
     	Channel = Name;
+    }
+    public void getClient(Client c){
+    	client = c;
+    	try {
+			Identifiants = client.getName();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    public void getServer(IServer s){
+    	server = s;
     }
 }
