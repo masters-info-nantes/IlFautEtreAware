@@ -127,6 +127,13 @@ public class Connection extends Application {
         }
     	try {
 			server.login(client);
+			server.createTopic(client, "Mythologie");
+			server.createTopic(client, "Litterature Française");
+	        server.topicSubscribe(client, server.getTopic("Mythologie"));
+	        server.topicSubscribe(client, server.getTopic("Litterature Française"));
+	        server.createTopic(client, "Génie logiciel");
+	        server.createTopic(client, "MDE");
+
 			Forum forum = new Forum();
 			//forum.getID(username);
 			forum.getClient(client);
