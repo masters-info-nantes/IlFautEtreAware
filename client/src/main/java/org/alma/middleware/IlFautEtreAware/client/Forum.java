@@ -1,22 +1,20 @@
-package application;
+package org.alma.middleware.IlFautEtreAware.client;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -44,18 +42,18 @@ public class Forum extends Application {
         Scene scene = new Scene(grid, 1100, 600);
         Stage secondStage = new Stage();
 
-        primaryStage.setTitle("Forum - Faut être aware");
+        primaryStage.setTitle("Forum - Faut ï¿½tre aware");
         primaryStage.setScene(scene);
         scene.getStylesheets().add
         	(Connection.class.getResource("JCVD.css").toExternalForm());
         primaryStage.show();
         
-        Text identifiants = new Text("Bonjour à toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
+        Text identifiants = new Text("Bonjour ï¿½ toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
         identifiants.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         identifiants.setId("welcome-text");
         
         Button btnDeco = new Button();
-        btnDeco.setText("Déconnexion");
+        btnDeco.setText("Dï¿½connexion");
         btnDeco.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -73,13 +71,13 @@ public class Forum extends Application {
         Text TopicsIns = new Text("Liste des abonnements :");
         
         ListView<String> ListInscrits = new ListView<String>();
-        ObservableList<String> items =FXCollections.observableArrayList ("Mythologie","Litterature Française"
+        ObservableList<String> items =FXCollections.observableArrayList ("Mythologie","Litterature Franï¿½aise"
             );
         ListInscrits.setItems(items);
         
         
         Button btnNew = new Button();
-        btnNew.setText("Nouveau thème");
+        btnNew.setText("Nouveau thï¿½me");
         
         Button btnGo = new Button();
         btnGo.setText("Aller au tchat");
@@ -186,7 +184,7 @@ public class Forum extends Application {
         
         
         ListView<String> ListDispo = new ListView<String>();
-        ObservableList<String> items2 =FXCollections.observableArrayList ("Génie Logiciel","MDE");
+        ObservableList<String> items2 =FXCollections.observableArrayList ("Gï¿½nie Logiciel","MDE");
         ListDispo.setItems(items2);
         
         
@@ -203,7 +201,7 @@ public class Forum extends Application {
           });
 
         Button btnDisabon = new Button();
-        btnDisabon.setText("Se désabonner");
+        btnDisabon.setText("Se dï¿½sabonner");
         btnDisabon.setOnAction((ActionEvent event) -> {
             String potential = ListInscrits.getSelectionModel()
                 .getSelectedItem();
@@ -221,7 +219,7 @@ public class Forum extends Application {
                         dialog.initModality(Modality.APPLICATION_MODAL);
                         dialog.initOwner(primaryStage);
                         VBox dialogVbox = new VBox(20);
-                        dialog.setTitle("Nouveau tchat - Faut être aware");
+                        dialog.setTitle("Nouveau tchat - Faut ï¿½tre aware");
                         Text Title = new Text("Choisissez un titre pour le nouveau tchat:");
                         dialogVbox.getChildren().add(Title);
                         TextField Topic = new TextField();
@@ -229,7 +227,7 @@ public class Forum extends Application {
                         dialogVbox.setPadding(new Insets(10,100,10,10)); 
                         Button btnNT = new Button();
                         dialogVbox.getChildren().add(btnNT);
-                        btnNT.setText("Créer nouveau tchat");
+                        btnNT.setText("Crï¿½er nouveau tchat");
                         Scene dialogScene = new Scene(dialogVbox, 400, 150);
                         dialog.setScene(dialogScene);
                         Title.setId("Title");

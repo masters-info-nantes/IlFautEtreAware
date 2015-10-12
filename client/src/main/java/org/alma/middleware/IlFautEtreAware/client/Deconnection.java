@@ -1,21 +1,11 @@
-package application;
+package org.alma.middleware.IlFautEtreAware.client;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -28,7 +18,7 @@ public class Deconnection extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Déconnection - Faut être aware");
+        primaryStage.setTitle("Dï¿½connection - Faut ï¿½tre aware");
         Stage secondStage = new Stage();
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -39,7 +29,7 @@ public class Deconnection extends Application {
         scene.getStylesheets().add
         (Deconnection.class.getResource("application.css").toExternalForm());
 
-        Text scenetitle = new Text("A bientôt mon ami\n et sois toujours aware");
+        Text scenetitle = new Text("A bientï¿½t mon ami\n et sois toujours aware");
         scenetitle.setStyle("-fx-text-alignement: center");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);

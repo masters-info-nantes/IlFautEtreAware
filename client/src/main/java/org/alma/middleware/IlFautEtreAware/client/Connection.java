@@ -1,6 +1,5 @@
-package application;
+package org.alma.middleware.IlFautEtreAware.client;
 
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,29 +8,29 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Connection extends Application {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         launch(args);
-    }
+    }*/
+	public void launchApp(String[] args){
+		launch(args);
+	}
     
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Connection - Faut être aware");
+        primaryStage.setTitle("Connection - Faut ï¿½tre aware");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -41,7 +40,7 @@ public class Connection extends Application {
         scene.getStylesheets().add
         (Connection.class.getResource("application.css").toExternalForm());
 
-        Text scenetitle = new Text("Bienvenue à toi, à moi, à tous");
+        Text scenetitle = new Text("Bienvenue ï¿½ toi, ï¿½ moi, ï¿½ tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 

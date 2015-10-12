@@ -1,21 +1,11 @@
-package application;
+package org.alma.middleware.IlFautEtreAware.client;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -27,7 +17,7 @@ public class errorNewTopic extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Erreur - Faut être aware");
+        primaryStage.setTitle("Erreur - Faut ï¿½tre aware");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -37,7 +27,7 @@ public class errorNewTopic extends Application {
         scene.getStylesheets().add
         (errorNewTopic.class.getResource("errorTopic.css").toExternalForm());
 
-        Text scenetitle = new Text("Rentre un nom de tchat\npour créer un tchat, sinon");
+        Text scenetitle = new Text("Rentre un nom de tchat\npour crï¿½er un tchat, sinon");
         Text redir = new Text("fermeture automatique");
 
         scenetitle.setStyle("-fx-text-alignment:center");
@@ -45,7 +35,7 @@ public class errorNewTopic extends Application {
         redir.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
         grid.add(redir, 2, 2);
-        //Fermeture d'une fenêtre après un décompte
+        //Fermeture d'une fenï¿½tre aprï¿½s un dï¿½compte
         PauseTransition pause = new PauseTransition(Duration.seconds(5));
         pause.setOnFinished(e -> primaryStage.hide());
         pause.play();
