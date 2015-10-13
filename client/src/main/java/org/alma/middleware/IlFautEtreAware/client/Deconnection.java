@@ -27,7 +27,7 @@ public class Deconnection extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 300);
         scene.getStylesheets().add
-        (Deconnection.class.getResource("css/application.css").toExternalForm());
+                ("/org/alma/middleware/IlFautEtreAware/client/css/application.css");
 
         Text scenetitle = new Text("A bientôt mon ami\n et sois toujours aware");
         scenetitle.setStyle("-fx-text-alignement: center");

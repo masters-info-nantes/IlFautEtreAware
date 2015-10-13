@@ -48,7 +48,7 @@ public class Connection extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 300);
         scene.getStylesheets().add
-        (Connection.class.getResource("css/application.css").toExternalForm());
+        ("/org/alma/middleware/IlFautEtreAware/client/css/application.css");
 
         Text scenetitle = new Text("Bienvenue à toi, à moi, à tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));

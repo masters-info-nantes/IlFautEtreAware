@@ -56,7 +56,7 @@ public class Forum extends Application {
 
         primaryStage.setTitle("Forum - Faut être aware");
         primaryStage.setScene(scene);
-        scene.getStylesheets().add(Connection.class.getResource("css/JCVD.css").toExternalForm());
+        scene.getStylesheets().add("/org/alma/middleware/IlFautEtreAware/client/css/JCVD.css");
         primaryStage.show();
         
         Text identifiants = new Text("Bonjour à toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
@@ -245,15 +245,15 @@ public class Forum extends Application {
                         dialogVbox.getChildren().add(Title);
                         TextField Topic = new TextField();
                         dialogVbox.getChildren().add(Topic);
-                        dialogVbox.setPadding(new Insets(10,100,10,10)); 
+                        dialogVbox.setPadding(new Insets(10,100,10,10));
                         Button btnNT = new Button();
                         dialogVbox.getChildren().add(btnNT);
                         btnNT.setText("Créer nouveau tchat");
                         Scene dialogScene = new Scene(dialogVbox, 400, 150);
                         dialog.setScene(dialogScene);
                         Title.setId("Title");
-                        dialogScene.getStylesheets().add(Connection.class.getResource("css/newTopic.css").toExternalForm());
-                       
+                        dialogScene.getStylesheets().add("/org/alma/middleware/IlFautEtreAware/client/css/newTopic.css");
+
                         dialog.show();
                         btnNT.setOnAction(
                                 new EventHandler<ActionEvent>() {

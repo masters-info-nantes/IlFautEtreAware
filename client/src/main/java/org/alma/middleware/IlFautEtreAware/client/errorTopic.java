@@ -25,7 +25,7 @@ public class errorTopic extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 380, 210);
         scene.getStylesheets().add
-        (errorTopic.class.getResource("css/errorTopic.css").toExternalForm());
+        ("/org/alma/middleware/IlFautEtreAware/client/css/errorTopic.css");
 
         Text scenetitle = new Text("Choisis une chaîne\npour accéder au tchat, sinon");
         Text redir = new Text("fermeture automatique");
