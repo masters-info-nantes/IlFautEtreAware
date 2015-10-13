@@ -48,7 +48,7 @@ public class Connection extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 300);
         scene.getStylesheets().add
-        ("/org/alma/middleware/IlFautEtreAware/client/css/application.css");
+                ("/org/alma/middleware/IlFautEtreAware/client/css/application.css");
 
         Text scenetitle = new Text("Bienvenue à toi, à moi, à tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -127,16 +127,18 @@ public class Connection extends Application {
         }
     	try {
 			server.login(client);
-			server.createTopic(client, "Mythologie");
-			server.createTopic(client, "Litterature Française");
-	        server.createTopic(client, "Génie logiciel");
-	        server.createTopic(client, "MDE");
 
 			Forum forum = new Forum();
 			//forum.getID(username);
+            client.setForum(forum);
 			forum.getClient(client);
 			forum.getServer(server);
 			forum.start(stage);
+
+            server.createTopic(client, "Mythologie");
+            server.createTopic(client, "Litterature Française");
+            server.createTopic(client, "Génie logiciel");
+            server.createTopic(client, "MDE");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

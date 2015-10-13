@@ -10,6 +10,7 @@ import java.util.List;
 public interface IServer extends Remote {
     public void login(IClient client) throws RemoteException;
     public List<ITopic> getTopics() throws RemoteException;
+    public List<String> getTopicsName() throws RemoteException;
     public ITopic getTopic(String topicName) throws RemoteException;
     public ITopic topicSubscribe(IClient client, ITopic t) throws RemoteException;
     public void topicUnsubscribe(IClient client, ITopic t) throws RemoteException;

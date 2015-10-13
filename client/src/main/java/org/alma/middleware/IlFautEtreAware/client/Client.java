@@ -15,6 +15,7 @@ import org.alma.middleware.IlFautEtreAware.common.Message;
 public class Client extends UnicastRemoteObject implements IClient, Serializable {
 
     private String name = "";
+    private Forum forum;
     private ArrayList<String> subscribedTopic = new ArrayList<String>();
     
     public Client() throws RemoteException {
@@ -24,11 +25,13 @@ public class Client extends UnicastRemoteObject implements IClient, Serializable
     @Override
     public void newMessage(Message message, String topic) throws RemoteException {
         System.out.println("[" + topic + "][" + message.getAuthor() + "] : " + message.getMessage());
+        forum.newMessage(message, topic);
     }
 
     @Override
     public void newTopic(ITopic topic) throws RemoteException {
         System.out.println("["+topic.getName()+"] : has created");
+        forum.newTopic(topic.getName());
     }
 
     @Override
@@ -38,6 +41,10 @@ public class Client extends UnicastRemoteObject implements IClient, Serializable
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setForum(Forum f) {
+        forum = f;
     }
 
 	public ArrayList<String> getSubscribedTopic() {

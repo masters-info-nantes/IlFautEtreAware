@@ -35,6 +35,15 @@ public class Server extends UnicastRemoteObject implements IServer, Serializable
         return t;
     }
 
+    @Override
+    public List<String> getTopicsName() throws RemoteException {
+        ArrayList<String> names = new ArrayList<String>();
+        for(ITopic t : topics.values()) {
+            names.add(t.getName());
+        }
+        return names;
+    }
+
     public ITopic getTopic(String topicName) throws RemoteException {
         return topics.get(topicName);
     }

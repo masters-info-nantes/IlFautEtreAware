@@ -43,8 +43,12 @@ public class Forum extends Application {
     private Client client;
     private IServer server;
     private ITopic selectedTopic;
+    private ListView<String> ListInscrits;
+    private ObservableList<String> items;
+    private ListView<String> ListDispo;
+    private ObservableList<String> items2;
     
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws RemoteException {
  
     	GridPane grid = new GridPane();
     	primaryStage.setX(200);
@@ -80,9 +84,8 @@ public class Forum extends Application {
         
         //Liste des abonnements
         Text TopicsIns = new Text("Liste des abonnements :");
-        
-        ListView<String> ListInscrits = new ListView<String>();
-        ObservableList<String> items = FXCollections.observableArrayList (client.getSubscribedTopic());
+        ListInscrits = new ListView<String>();
+        items = FXCollections.observableArrayList (client.getSubscribedTopic());
         ListInscrits.setItems(items);
         
         
@@ -178,23 +181,13 @@ public class Forum extends Application {
                 	}
                 });
         
-        //Topics
-        List<ITopic> allTopic;
-        List<String> allTopicNames = new ArrayList<String>();
-        try {
-			allTopic =  server.getTopics();
-			for(ITopic t : allTopic){
-				allTopicNames.add(t.getName());
-			}
-		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+
        
         Text TopicsDispos = new Text("Topics disponibles :");
        
-        ListView<String> ListDispo = new ListView<String>();
-        ObservableList<String> items2 =FXCollections.observableArrayList (allTopicNames);
+        ListDispo = new ListView<String>();
+        items2 =FXCollections.observableArrayList (server.getTopicsName());
         ListDispo.setItems(items2);
         
         
@@ -218,7 +211,18 @@ public class Forum extends Application {
         Button btnDisabon = new Button();
         btnDisabon.setText("Se désabonner");
         btnDisabon.setOnAction((ActionEvent event) -> {
+
             String potential = ListInscrits.getSelectionModel().getSelectedItem();
+            try {
+                if (selectedTopic.getName().equals(potential)) {
+                    grid.getChildren().remove(channelName);
+                    grid.getChildren().remove(output);
+                    grid.getChildren().remove(input);
+                    grid.getChildren().remove(btnEnvoyer);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
             if (potential != null) {
             	try {
 					server.topicUnsubscribe(client, server.getTopic(potential));
@@ -264,8 +268,6 @@ public class Forum extends Application {
                                 			errorNewTopic error = new errorNewTopic();
                                            	error.start(secondStage);       	
                                         } else {
-                                        	ListInscrits.getSelectionModel().clearSelection();
-                                        	items.add(NewTopic);
                                         	try {
 												server.createTopic(client, NewTopic);
 											} catch (RemoteException e) {
@@ -362,17 +364,25 @@ public class Forum extends Application {
 			e.printStackTrace();
 		}    
     }
+
+    public void newMessage(Message msg, String topic) throws RemoteException {
+        if(selectedTopic.getName().equals(topic))
+            output.appendText(msg.toString()+ newline);
+    }
     
     public void sendMessage(){
     	String text = input.getText();
   	  	try {
       		Message m = new Message(Identifiants,text);
 			selectedTopic.broadcast(m);
-      		output.appendText(m.toString()+ newline);
       	} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
       	}
   	  	input.selectAll();
+    }
+
+    public void newTopic(String topic) {
+        items2.add(topic);
     }
 }
