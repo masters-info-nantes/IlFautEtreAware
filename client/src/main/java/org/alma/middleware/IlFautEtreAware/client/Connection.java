@@ -36,7 +36,6 @@ public class Connection extends Application {
 		launch(args);
 	}
 	
-    
     @Override
     public void start(Stage primaryStage) {
     	
@@ -69,8 +68,7 @@ public class Connection extends Application {
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 4);
         
-        userTextField.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
+        userTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke)
             {
@@ -131,7 +129,7 @@ public class Connection extends Application {
 			Forum forum = new Forum();
 			//forum.getID(username);
             client.setForum(forum);
-			forum.getClient(client);
+			forum.setClient(client);
 			forum.getServer(server);
 			forum.start(stage);
 
