@@ -53,6 +53,7 @@ public class Forum extends Application {
     
     public void start(Stage primaryStage) throws RemoteException {
  
+    	//Création de la fenêtre avec ses paramètres de taille et de disposition
     	grid = new GridPane();
     	primaryStage.setX(200);
         grid.setHgap(10);
@@ -61,6 +62,7 @@ public class Forum extends Application {
         Scene scene = new Scene(grid, 1100, 600);
         Stage secondStage = new Stage();
 
+        //Définition nom et style css de la fenêtre
         primaryStage.setTitle("Forum - Faut être aware");
         primaryStage.setScene(scene);
         scene.getStylesheets().add("/org/alma/middleware/IlFautEtreAware/client/css/JCVD.css");
@@ -99,22 +101,17 @@ public class Forum extends Application {
         listDispoItems = FXCollections.observableArrayList (server.getTopicsName());
         listDispo.setItems(listDispoItems);
         
+        //Bouton pour se rendre sur un tchat
         Button btnGo = new Button();
         btnGo.setText("Aller au tchat");
         btnGo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-            	getTopic(listInscrits.getSelectionModel().getSelectedItem());
-        		if(Channel==null){
-        			errorTopic error = new errorTopic();
-                   	error.start(secondStage);
-        		}
-        		else {
-        			openFenetreChat();
-        		}
-            }
+            public void handle(ActionEvent event) {            	
+            	goToTchat(secondStage);            	
+            }			
         });
 
+        //Bouton + méthode pour l'inscription à un tchat
         Button btnInscri = new Button();
         btnInscri.setText("S'inscrire");
         btnInscri.setOnAction((ActionEvent event) -> {
@@ -132,6 +129,7 @@ public class Forum extends Application {
             }
           });
 
+        //Bouton + méthode pour la desinscription à un tchat
         Button btnDisabon = new Button();
         btnDisabon.setText("Se désabonner");
         btnDisabon.setOnAction((ActionEvent event) -> {
@@ -159,51 +157,20 @@ public class Forum extends Application {
             }
           });
         
+        //Bouton + métrode pour la création d'un nouveau tchat
         Button btnNew = new Button();
         btnNew.setText("Nouveau thème");
         btnNew.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                final Stage dialog = new Stage();
-                dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.initOwner(primaryStage);
-                VBox dialogVbox = new VBox(20);
-                dialog.setTitle("Nouveau tchat - Faut être aware");
-                Text Title = new Text("Choisissez un titre pour le nouveau tchat:");
-                dialogVbox.getChildren().add(Title);
-                TextField Topic = new TextField();
-                dialogVbox.getChildren().add(Topic);
-                dialogVbox.setPadding(new Insets(10,100,10,10));
-                Button btnNT = new Button();
-                dialogVbox.getChildren().add(btnNT);
-                btnNT.setText("Créer nouveau tchat");
-                Scene dialogScene = new Scene(dialogVbox, 400, 150);
-                dialog.setScene(dialogScene);
-                Title.setId("Title");
-                dialogScene.getStylesheets().add("/org/alma/middleware/IlFautEtreAware/client/css/newTopic.css");
-
-                dialog.show();
-                btnNT.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                    	createNewTopic(Topic,dialog,secondStage);
-                    }
-                });
-                Topic.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent ke)
-                    {
-                        if (ke.getCode().equals(KeyCode.ENTER))
-                        {
-                        	createNewTopic(Topic,dialog,secondStage);
-                        }
-                    }
-                });
+            	
+            	
+            	windowNewTopic(primaryStage,  secondStage);
             }
         });
         
       
-
+        //Disposition des différents éléments sur la fenêtre princiale
         TopicsIns.setId("Topic");
         TopicsDispos.setId("Topic");
         grid.add(identifiants, 1,0);
@@ -219,9 +186,22 @@ public class Forum extends Application {
         
     }
     
-    public void Deconnexion(Stage stage){
+
+    //Début des différentes méthodes
+	public void Deconnexion(Stage stage){
     	Deconnection connect = new Deconnection();
     	connect.start(stage);		
+	}
+    private void goToTchat(Stage secondStage) {
+		getTopic(listInscrits.getSelectionModel().getSelectedItem());
+		if(Channel==null){
+			errorTopic error = new errorTopic();
+           	error.start(secondStage);
+		}
+		else {
+			openFenetreChat();
+		}
+		
 	}
     
     public void createNewTopic(TextField Topic, Stage dialog, Stage secondStage){
@@ -302,8 +282,7 @@ public class Forum extends Application {
                 @Override
                 public void handle(ActionEvent event) {
                 	sendMessage();
-                }
-           
+                }           
             });
             
     	}
@@ -378,4 +357,44 @@ public class Forum extends Application {
     public void newTopic(String topic) {
         listDispoItems.add(topic);
     }
+    
+    protected void windowNewTopic(Stage primaryStage, Stage secondStage) {    	
+    	
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(primaryStage);
+        VBox dialogVbox = new VBox(20);
+        dialog.setTitle("Nouveau tchat - Faut être aware");
+        Text Title = new Text("Choisissez un titre pour le nouveau tchat:");
+        dialogVbox.getChildren().add(Title);
+        TextField Topic = new TextField();
+        dialogVbox.getChildren().add(Topic);
+        dialogVbox.setPadding(new Insets(10,100,10,10));
+        Button btnNT = new Button();
+        dialogVbox.getChildren().add(btnNT);
+        btnNT.setText("Créer nouveau tchat");
+        Scene dialogScene = new Scene(dialogVbox, 400, 150);
+        dialog.setScene(dialogScene);
+        Title.setId("Title");
+        dialogScene.getStylesheets().add("/org/alma/middleware/IlFautEtreAware/client/css/newTopic.css");
+
+        dialog.show();
+        btnNT.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	createNewTopic(Topic,dialog,secondStage);
+            }
+        });
+        Topic.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke)
+            {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                	createNewTopic(Topic,dialog,secondStage);
+                }
+            }
+        });
+		
+	}
 }
