@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,7 +19,8 @@ public class Deconnection extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("DÃ©connection - Faut Ãªtre aware");
+        primaryStage.setTitle("Déconnection - Faut être aware");
+        primaryStage.getIcons().add(new Image("/images/logo.png"));
         Stage secondStage = new Stage();
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -27,9 +29,9 @@ public class Deconnection extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 300);
         scene.getStylesheets().add
-                ("/org/alma/middleware/IlFautEtreAware/client/css/application.css");
+                ("/css/application.css");
 
-        Text scenetitle = new Text("A bientÃ´t mon ami\n et sois toujours aware");
+        Text scenetitle = new Text("A bientôt mon ami\n et sois toujours aware");
         scenetitle.setStyle("-fx-text-alignement: center");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);

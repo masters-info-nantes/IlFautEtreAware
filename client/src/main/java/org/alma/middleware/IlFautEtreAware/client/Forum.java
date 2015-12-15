@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -63,9 +64,10 @@ public class Forum extends Application {
         Stage secondStage = new Stage();
 
         //Définition nom et style css de la fenêtre
-        primaryStage.setTitle("Forum - Faut être aware");
+        primaryStage.setTitle("Forum - Faut �tre aware");
+        primaryStage.getIcons().add(new Image("/images/logo.png"));
         primaryStage.setScene(scene);
-        scene.getStylesheets().add("/org/alma/middleware/IlFautEtreAware/client/css/JCVD.css");
+        scene.getStylesheets().add("/css/JCVD.css");
         primaryStage.show();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override
@@ -75,12 +77,12 @@ public class Forum extends Application {
         	}
         });
         
-        Text identifiants = new Text("Bonjour à toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
+        Text identifiants = new Text("Bonjour � toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
         identifiants.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         identifiants.setId("welcome-text");
         
         Button btnDeco = new Button();
-        btnDeco.setText("Déconnexion");
+        btnDeco.setText("D�connexion");
         btnDeco.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -131,7 +133,7 @@ public class Forum extends Application {
 
         //Bouton + méthode pour la desinscription à un tchat
         Button btnDisabon = new Button();
-        btnDisabon.setText("Se désabonner");
+        btnDisabon.setText("Se d�sabonner");
         btnDisabon.setOnAction((ActionEvent event) -> {
             String potential = listInscrits.getSelectionModel().getSelectedItem();
             try {
@@ -146,7 +148,6 @@ public class Forum extends Application {
             }
             if (potential != null) {
             	try {
-					server.topicUnsubscribe(client, server.getTopic(potential));
 					listInscrits.getSelectionModel().clearSelection();
 	            	listInscritsItems.remove(potential);
 	            	listDispoItems.add(potential);
@@ -159,7 +160,7 @@ public class Forum extends Application {
         
         //Bouton + métrode pour la création d'un nouveau tchat
         Button btnNew = new Button();
-        btnNew.setText("Nouveau thème");
+        btnNew.setText("Nouveau th�me");
         btnNew.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -168,6 +169,34 @@ public class Forum extends Application {
             	windowNewTopic(primaryStage,  secondStage);
             }
         });
+      //Bouton + méthode pour la desinscription à un tchat
+        Button btnsuppr = new Button();
+        btnsuppr.setText("Supprimer le th�me");
+        btnsuppr.setOnAction((ActionEvent event) -> {
+        	 String potential = listInscrits.getSelectionModel().getSelectedItem();
+             try {
+                 if (selectedTopic.getName().equals(potential)) {
+                     grid.getChildren().remove(channelName);
+                     grid.getChildren().remove(output);
+                     grid.getChildren().remove(input);
+                     grid.getChildren().remove(btnEnvoyer);
+                 }
+             } catch (RemoteException e) {
+                 e.printStackTrace();
+             }
+             if (potential != null) {
+             	try {
+ 					server.topicUnsubscribe(client, server.getTopic(potential));
+ 					listInscrits.getSelectionModel().clearSelection();
+ 	            	listInscritsItems.remove(potential);
+ 				} catch (Exception e) {
+ 					// TODO Auto-generated catch block
+ 					e.printStackTrace();
+ 				}
+             }
+           });
+         
+        
         
       
         //Disposition des différents éléments sur la fenêtre princiale
@@ -179,7 +208,8 @@ public class Forum extends Application {
         grid.add(listInscrits, 0,3);
         grid.add(btnGo, 0,5);
         grid.add(btnDisabon, 0,6);
-        grid.add(btnNew, 0,7);        
+        grid.add(btnNew, 0,7);   
+        grid.add(btnsuppr, 0,8); 
         grid.add(TopicsDispos, 0,12);
         grid.add(listDispo, 0,14);
         grid.add(btnInscri, 0,16);
@@ -364,7 +394,9 @@ public class Forum extends Application {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(primaryStage);
         VBox dialogVbox = new VBox(20);
-        dialog.setTitle("Nouveau tchat - Faut être aware");
+        dialog.setTitle("Nouveau tchat - Faut �tre aware");
+    	primaryStage.getIcons().add(new Image("/images/logo.png"));
+    	secondStage.getIcons().add(new Image("/images/logo.png"));
         Text Title = new Text("Choisissez un titre pour le nouveau tchat:");
         dialogVbox.getChildren().add(Title);
         TextField Topic = new TextField();
@@ -372,17 +404,19 @@ public class Forum extends Application {
         dialogVbox.setPadding(new Insets(10,100,10,10));
         Button btnNT = new Button();
         dialogVbox.getChildren().add(btnNT);
-        btnNT.setText("Créer nouveau tchat");
+        btnNT.setText("Cr�er nouveau tchat");
         Scene dialogScene = new Scene(dialogVbox, 400, 150);
         dialog.setScene(dialogScene);
         Title.setId("Title");
-        dialogScene.getStylesheets().add("/org/alma/middleware/IlFautEtreAware/client/css/newTopic.css");
+        dialogScene.getStylesheets().add("/css/newTopic.css");
 
         dialog.show();
         btnNT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	createNewTopic(Topic,dialog,secondStage);
+            	primaryStage.getIcons().add(new Image("/images/logo.png"));
+            	secondStage.getIcons().add(new Image("/images/logo.png"));
             }
         });
         Topic.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -392,6 +426,8 @@ public class Forum extends Application {
                 if (ke.getCode().equals(KeyCode.ENTER))
                 {
                 	createNewTopic(Topic,dialog,secondStage);
+                	primaryStage.getIcons().add(new Image("/images/logo.png"));
+                	secondStage.getIcons().add(new Image("/images/logo.png"));
                 }
             }
         });

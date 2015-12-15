@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -21,7 +22,8 @@ public class error extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Erreur - Faut Ãªtre aware");
+        primaryStage.setTitle("Erreur - Faut être aware");
+        primaryStage.getIcons().add(new Image("/images/logo.png"));
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -29,7 +31,7 @@ public class error extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 260);
         scene.getStylesheets().add
-        ("/org/alma/middleware/IlFautEtreAware/client/css/error.css");
+        ("/css/error.css");
 
         Text scenetitle = new Text("Rentre un nom d'utilisateur, sinon");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));

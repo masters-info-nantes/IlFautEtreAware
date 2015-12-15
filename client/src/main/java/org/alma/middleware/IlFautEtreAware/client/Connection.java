@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -39,7 +40,8 @@ public class Connection extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Connection - Faut Ãªtre aware");
+        primaryStage.setTitle("Connection - Faut être aware");
+        primaryStage.getIcons().add(new Image("/images/logo.png"));
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -47,9 +49,9 @@ public class Connection extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 480, 300);
         scene.getStylesheets().add
-                ("/org/alma/middleware/IlFautEtreAware/client/css/application.css");
+                ("/css/application.css");
 
-        Text scenetitle = new Text("Bienvenue Ã  toi, Ã  moi, Ã  tous");
+        Text scenetitle = new Text("Bienvenue à  toi, à  moi, à  tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 
@@ -134,8 +136,8 @@ public class Connection extends Application {
 			forum.start(stage);
 
             server.createTopic(client, "Mythologie");
-            server.createTopic(client, "Litterature FranÃ§aise");
-            server.createTopic(client, "GÃ©nie logiciel");
+            server.createTopic(client, "Litterature Française");
+            server.createTopic(client, "Génie logiciel");
             server.createTopic(client, "MDE");
 		} catch (RemoteException e) {
 			e.printStackTrace();

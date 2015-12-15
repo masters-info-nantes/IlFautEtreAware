@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -17,7 +18,8 @@ public class errorTopic extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Erreur - Faut Ãªtre aware");
+        primaryStage.setTitle("Erreur - Faut être aware");
+        primaryStage.getIcons().add(new Image("/images/logo.png"));
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -25,9 +27,9 @@ public class errorTopic extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         Scene scene = new Scene(grid, 380, 210);
         scene.getStylesheets().add
-        ("/org/alma/middleware/IlFautEtreAware/client/css/errorTopic.css");
+        ("/css/errorTopic.css");
 
-        Text scenetitle = new Text("Choisis une chaÃ®ne\npour accÃ©der au tchat, sinon");
+        Text scenetitle = new Text("Choisis une chaine\npour accéder au tchat, sinon");
         Text redir = new Text("fermeture automatique");
 
         scenetitle.setStyle("-fx-text-alignment:center");

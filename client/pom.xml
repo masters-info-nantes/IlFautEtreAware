@@ -45,6 +45,11 @@
         		</configuration>
       		</plugin>
 		</plugins>
+		<resources>
+     <resource>
+       <directory>ressources</directory>
+     </resource>
+   </resources>
 	</build>
 
 </project>
