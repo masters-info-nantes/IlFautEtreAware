@@ -130,33 +130,7 @@ public class Forum extends Application {
 				}
             }
           });
-
-        //Bouton + mÃ©thode pour la desinscription Ã  un tchat
-        Button btnDisabon = new Button();
-        btnDisabon.setText("Se désabonner");
-        btnDisabon.setOnAction((ActionEvent event) -> {
-            String potential = listInscrits.getSelectionModel().getSelectedItem();
-            try {
-                if (selectedTopic.getName().equals(potential)) {
-                    grid.getChildren().remove(channelName);
-                    grid.getChildren().remove(output);
-                    grid.getChildren().remove(input);
-                    grid.getChildren().remove(btnEnvoyer);
-                }
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-            if (potential != null) {
-            	try {
-					listInscrits.getSelectionModel().clearSelection();
-	            	listInscritsItems.remove(potential);
-	            	listDispoItems.add(potential);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-          });
+       
         
         //Bouton + mÃ©trode pour la crÃ©ation d'un nouveau tchat
         Button btnNew = new Button();
@@ -169,32 +143,6 @@ public class Forum extends Application {
             	windowNewTopic(primaryStage,  secondStage);
             }
         });
-      //Bouton + mÃ©thode pour la desinscription Ã  un tchat
-        Button btnsuppr = new Button();
-        btnsuppr.setText("Supprimer le thème");
-        btnsuppr.setOnAction((ActionEvent event) -> {
-        	 String potential = listInscrits.getSelectionModel().getSelectedItem();
-             try {
-                 if (selectedTopic.getName().equals(potential)) {
-                     grid.getChildren().remove(channelName);
-                     grid.getChildren().remove(output);
-                     grid.getChildren().remove(input);
-                     grid.getChildren().remove(btnEnvoyer);
-                 }
-             } catch (RemoteException e) {
-                 e.printStackTrace();
-             }
-             if (potential != null) {
-             	try {
- 					server.topicUnsubscribe(client, server.getTopic(potential));
- 					listInscrits.getSelectionModel().clearSelection();
- 	            	listInscritsItems.remove(potential);
- 				} catch (Exception e) {
- 					// TODO Auto-generated catch block
- 					e.printStackTrace();
- 				}
-             }
-           });
          
         
         
@@ -207,9 +155,7 @@ public class Forum extends Application {
         grid.add(TopicsIns, 0,2);
         grid.add(listInscrits, 0,3);
         grid.add(btnGo, 0,5);
-        grid.add(btnDisabon, 0,6);
         grid.add(btnNew, 0,7);   
-        grid.add(btnsuppr, 0,8); 
         grid.add(TopicsDispos, 0,12);
         grid.add(listDispo, 0,14);
         grid.add(btnInscri, 0,16);
@@ -317,11 +263,71 @@ public class Forum extends Application {
             
     	}
 
+        Button btnsuppr = new Button();
+        btnsuppr.setText("Supprimer le thème");
+
+        //Bouton + mÃ©thode pour la desinscription Ã  un tchat
+        Button btnDisabon = new Button();
+        btnDisabon.setText("Se désabonner");
+        btnDisabon.setOnAction((ActionEvent event) -> {
+            String potential = listInscrits.getSelectionModel().getSelectedItem();
+            try {
+                if (selectedTopic.getName().equals(potential)) {
+                    grid.getChildren().remove(channelName);
+                    grid.getChildren().remove(output);
+                    grid.getChildren().remove(input);
+                    grid.getChildren().remove(btnEnvoyer);
+                    grid.getChildren().remove(btnDisabon);
+                    grid.getChildren().remove(btnsuppr);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            if (potential != null) {
+            	try {
+					listInscrits.getSelectionModel().clearSelection();
+	            	listInscritsItems.remove(potential);
+	            	listDispoItems.add(potential);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+          });
+      //Bouton + mÃ©thode pour la desinscription Ã  un tchat
+        btnsuppr.setOnAction((ActionEvent event) -> {
+        	 String potential = listInscrits.getSelectionModel().getSelectedItem();
+             try {
+                 if (selectedTopic.getName().equals(potential)) {
+                     grid.getChildren().remove(channelName);
+                     grid.getChildren().remove(output);
+                     grid.getChildren().remove(input);
+                     grid.getChildren().remove(btnEnvoyer);
+                     grid.getChildren().remove(btnDisabon);
+                     grid.getChildren().remove(btnsuppr);
+                 }
+             } catch (RemoteException e) {
+                 e.printStackTrace();
+             }
+             if (potential != null) {
+             	try {
+ 					server.topicDeleted(client, server.getTopic(potential));
+ 					listInscrits.getSelectionModel().clearSelection();
+ 	            	listInscritsItems.remove(potential);
+ 				} catch (Exception e) {
+ 					// TODO Auto-generated catch block
+ 					e.printStackTrace();
+ 				}
+             }
+           });
+
         channelName.setId("Topic");
         grid.add(channelName, 1,2);
       	grid.add(output, 1,3,6,10);
       	grid.add(input,1,8,1,8);
       	grid.add(btnEnvoyer,2,8,10,8);
+        grid.add(btnDisabon, 0,6);
+        grid.add(btnsuppr, 0,8); 
 
 	}
     

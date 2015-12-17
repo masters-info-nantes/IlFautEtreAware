@@ -14,5 +14,6 @@ public interface IServer extends Remote {
     public ITopic getTopic(String topicName) throws RemoteException;
     public ITopic topicSubscribe(IClient client, ITopic t) throws RemoteException;
     public void topicUnsubscribe(IClient client, ITopic t) throws RemoteException;
+    public void topicDeleted(IClient client, ITopic t) throws RemoteException;
     public void createTopic (IClient client, String name) throws RemoteException;
 }
