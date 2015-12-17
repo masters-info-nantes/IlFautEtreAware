@@ -22,7 +22,7 @@ public class error extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Erreur - Faut être aware");
+        primaryStage.setTitle("Erreur - Faut Ãªtre aware");
         primaryStage.getIcons().add(new Image("/images/logo.png"));
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);

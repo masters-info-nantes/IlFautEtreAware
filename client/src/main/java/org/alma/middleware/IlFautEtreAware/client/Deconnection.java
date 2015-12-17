@@ -19,7 +19,7 @@ public class Deconnection extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Déconnection - Faut être aware");
+        primaryStage.setTitle("DÃ©connection - Faut Ãªtre aware");
         primaryStage.getIcons().add(new Image("/images/logo.png"));
         Stage secondStage = new Stage();
         GridPane grid = new GridPane();
@@ -31,7 +31,7 @@ public class Deconnection extends Application {
         scene.getStylesheets().add
                 ("/css/application.css");
 
-        Text scenetitle = new Text("A bientôt mon ami\n et sois toujours aware");
+        Text scenetitle = new Text("A bientÃ´t mon ami\n et sois toujours aware");
         scenetitle.setStyle("-fx-text-alignement: center");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);

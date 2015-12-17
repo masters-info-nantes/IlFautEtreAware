@@ -54,7 +54,7 @@ public class Forum extends Application {
     
     public void start(Stage primaryStage) throws RemoteException {
  
-    	//Création de la fenêtre avec ses paramètres de taille et de disposition
+    	//CrÃ©ation de la fenÃªtre avec ses paramÃ¨tres de taille et de disposition
     	grid = new GridPane();
     	primaryStage.setX(200);
         grid.setHgap(10);
@@ -63,8 +63,8 @@ public class Forum extends Application {
         Scene scene = new Scene(grid, 1100, 600);
         Stage secondStage = new Stage();
 
-        //Définition nom et style css de la fenêtre
-        primaryStage.setTitle("Forum - Faut �tre aware");
+        //DÃ©finition nom et style css de la fenÃªtre
+        primaryStage.setTitle("Forum - Faut être aware");
         primaryStage.getIcons().add(new Image("/images/logo.png"));
         primaryStage.setScene(scene);
         scene.getStylesheets().add("/css/JCVD.css");
@@ -77,12 +77,12 @@ public class Forum extends Application {
         	}
         });
         
-        Text identifiants = new Text("Bonjour � toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
+        Text identifiants = new Text("Bonjour à  toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
         identifiants.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         identifiants.setId("welcome-text");
         
         Button btnDeco = new Button();
-        btnDeco.setText("D�connexion");
+        btnDeco.setText("Déconnexion");
         btnDeco.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -113,7 +113,7 @@ public class Forum extends Application {
             }			
         });
 
-        //Bouton + méthode pour l'inscription à un tchat
+        //Bouton + mÃ©thode pour l'inscription Ã  un tchat
         Button btnInscri = new Button();
         btnInscri.setText("S'inscrire");
         btnInscri.setOnAction((ActionEvent event) -> {
@@ -131,9 +131,9 @@ public class Forum extends Application {
             }
           });
 
-        //Bouton + méthode pour la desinscription à un tchat
+        //Bouton + mÃ©thode pour la desinscription Ã  un tchat
         Button btnDisabon = new Button();
-        btnDisabon.setText("Se d�sabonner");
+        btnDisabon.setText("Se désabonner");
         btnDisabon.setOnAction((ActionEvent event) -> {
             String potential = listInscrits.getSelectionModel().getSelectedItem();
             try {
@@ -158,9 +158,9 @@ public class Forum extends Application {
             }
           });
         
-        //Bouton + métrode pour la création d'un nouveau tchat
+        //Bouton + mÃ©trode pour la crÃ©ation d'un nouveau tchat
         Button btnNew = new Button();
-        btnNew.setText("Nouveau th�me");
+        btnNew.setText("Nouveau thème");
         btnNew.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -169,9 +169,9 @@ public class Forum extends Application {
             	windowNewTopic(primaryStage,  secondStage);
             }
         });
-      //Bouton + méthode pour la desinscription à un tchat
+      //Bouton + mÃ©thode pour la desinscription Ã  un tchat
         Button btnsuppr = new Button();
-        btnsuppr.setText("Supprimer le th�me");
+        btnsuppr.setText("Supprimer le thème");
         btnsuppr.setOnAction((ActionEvent event) -> {
         	 String potential = listInscrits.getSelectionModel().getSelectedItem();
              try {
@@ -199,7 +199,7 @@ public class Forum extends Application {
         
         
       
-        //Disposition des différents éléments sur la fenêtre princiale
+        //Disposition des diffÃ©rents Ã©lÃ©ments sur la fenÃªtre princiale
         TopicsIns.setId("Topic");
         TopicsDispos.setId("Topic");
         grid.add(identifiants, 1,0);
@@ -217,7 +217,7 @@ public class Forum extends Application {
     }
     
 
-    //Début des différentes méthodes
+    //DÃ©but des diffÃ©rentes mÃ©thodes
 	public void Deconnexion(Stage stage){
     	Deconnection connect = new Deconnection();
     	connect.start(stage);		
@@ -394,7 +394,7 @@ public class Forum extends Application {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(primaryStage);
         VBox dialogVbox = new VBox(20);
-        dialog.setTitle("Nouveau tchat - Faut �tre aware");
+        dialog.setTitle("Nouveau tchat - Faut être aware");
     	primaryStage.getIcons().add(new Image("/images/logo.png"));
     	secondStage.getIcons().add(new Image("/images/logo.png"));
         Text Title = new Text("Choisissez un titre pour le nouveau tchat:");
@@ -404,7 +404,7 @@ public class Forum extends Application {
         dialogVbox.setPadding(new Insets(10,100,10,10));
         Button btnNT = new Button();
         dialogVbox.getChildren().add(btnNT);
-        btnNT.setText("Cr�er nouveau tchat");
+        btnNT.setText("Créer nouveau tchat");
         Scene dialogScene = new Scene(dialogVbox, 400, 150);
         dialog.setScene(dialogScene);
         Title.setId("Title");

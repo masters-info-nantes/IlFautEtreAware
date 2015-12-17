@@ -18,7 +18,7 @@ public class errorTopic extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Erreur - Faut �tre aware");
+        primaryStage.setTitle("Erreur - Faut être aware");
         primaryStage.getIcons().add(new Image("/images/logo.png"));
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -29,7 +29,7 @@ public class errorTopic extends Application {
         scene.getStylesheets().add
         ("/css/errorTopic.css");
 
-        Text scenetitle = new Text("Choisis une chaine\npour acc�der au tchat, sinon");
+        Text scenetitle = new Text("Choisis une chaine\npour accéder au tchat, sinon");
         Text redir = new Text("fermeture automatique");
 
         scenetitle.setStyle("-fx-text-alignment:center");
@@ -37,7 +37,7 @@ public class errorTopic extends Application {
         redir.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
         grid.add(redir, 2, 2);
-        //Fermeture d'une fen�tre apr�s un d�compte
+        //Fermeture d'une fenï¿½tre aprï¿½s un dï¿½compte
         PauseTransition pause = new PauseTransition(Duration.seconds(5));
         pause.setOnFinished(e -> primaryStage.hide());
         pause.play();

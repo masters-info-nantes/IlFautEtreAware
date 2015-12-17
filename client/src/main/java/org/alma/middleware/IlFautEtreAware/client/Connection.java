@@ -40,7 +40,7 @@ public class Connection extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        primaryStage.setTitle("Connection - Faut être aware");
+        primaryStage.setTitle("Connection - Faut Ãªtre aware");
         primaryStage.getIcons().add(new Image("/images/logo.png"));
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -51,7 +51,7 @@ public class Connection extends Application {
         scene.getStylesheets().add
                 ("/css/application.css");
 
-        Text scenetitle = new Text("Bienvenue à  toi, à  moi, à  tous");
+        Text scenetitle = new Text("Bienvenue Ã Â  toi, Ã Â  moi, Ã Â  tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 
@@ -136,8 +136,8 @@ public class Connection extends Application {
 			forum.start(stage);
 
             server.createTopic(client, "Mythologie");
-            server.createTopic(client, "Litterature Française");
-            server.createTopic(client, "Génie logiciel");
+            server.createTopic(client, "Litterature FranÃ§aise");
+            server.createTopic(client, "GÃ©nie logiciel");
             server.createTopic(client, "MDE");
 		} catch (RemoteException e) {
 			e.printStackTrace();
