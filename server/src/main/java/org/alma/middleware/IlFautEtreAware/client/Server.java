@@ -1,26 +1,47 @@
 package org.alma.middleware.IlFautEtreAware.client;
 
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.alma.middleware.IlFautEtreAware.common.IClient;
 import org.alma.middleware.IlFautEtreAware.common.IServer;
 import org.alma.middleware.IlFautEtreAware.common.ITopic;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
 
 /**
  * Created by Maxime on 02/10/2015.
  */
 public class Server extends UnicastRemoteObject implements IServer, Serializable {
 
+    private final static String DB_TOPIC_LIST = "topics";
+
     private HashMap<String, ITopic> topics = new HashMap<String, ITopic>();
     private ArrayList<IClient> clients = new ArrayList<IClient>();
+    private DB db;
+    private Set<String> dbTopics;
 
     public Server() throws RemoteException {
         super();
+
+        this.db = DBMaker.newFileDB(new File("storage.db"))
+                .closeOnJvmShutdown()
+                .transactionDisable()
+                .make();
+
+        this.dbTopics = this.db.getHashSet(DB_TOPIC_LIST);
+        if(db.exists(DB_TOPIC_LIST)) {
+            for(String topicName : this.dbTopics) {
+                ITopic topic = new Topic(topicName,this.db);
+                this.topics.put(topicName, topic);
+            }
+        }
     }
 
     public void login(IClient client) {
@@ -57,22 +78,17 @@ public class Server extends UnicastRemoteObject implements IServer, Serializable
     }
 
     public void topicUnsubscribe(IClient client, ITopic t) throws RemoteException {
-        Topic topic = (Topic)topics.get(t.getName());
+        Topic topic = (Topic) topics.get(t.getName());
         topic.removeClient(client);
         client.removeSubscribedTopic(t);
         System.out.println("[Server] Unsubscribe topic "+t.getName()+" : "+client.getName());
     }
-    public void topicDeleted(IClient client, ITopic t) throws RemoteException {
-        Topic topic = (Topic)topics.get(t.getName());
-        topic.removeClient(client);
-        client.removeSubscribedTopic(t);
-        System.out.println("[Server] Topic "+t.getName()+" deleted : "+client.getName());
-    }
 
     public void createTopic (IClient client, String name) throws RemoteException {
-        Topic t = new Topic(name);
+        Topic t = new Topic(name, db);
         if(!topics.containsKey(name)){
         	topics.put(name, t);
+            this.dbTopics.add(name);
         	for(IClient c : clients) {
                 c.newTopic(t);
             }

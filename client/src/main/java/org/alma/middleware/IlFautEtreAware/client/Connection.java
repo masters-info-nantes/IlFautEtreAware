@@ -134,11 +134,7 @@ public class Connection extends Application {
 			forum.setClient(client);
 			forum.getServer(server);
 			forum.start(stage);
-
-            server.createTopic(client, "Mythologie");
-            server.createTopic(client, "Litterature Française");
-            server.createTopic(client, "Génie logiciel");
-            server.createTopic(client, "MDE");
+            
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

@@ -51,6 +51,7 @@ public class Forum extends Application {
     private ListView<String> listDispo;
     private ObservableList<String> listInscritsItems;
     private ObservableList<String> listDispoItems;
+    Button btnDisabon = new Button();
     
     public void start(Stage primaryStage) throws RemoteException {
  
@@ -263,11 +264,10 @@ public class Forum extends Application {
             
     	}
 
-        Button btnsuppr = new Button();
-        btnsuppr.setText("Supprimer le thème");
+
+
 
         //Bouton + mÃ©thode pour la desinscription Ã  un tchat
-        Button btnDisabon = new Button();
         btnDisabon.setText("Se désabonner");
         btnDisabon.setOnAction((ActionEvent event) -> {
             String potential = listInscrits.getSelectionModel().getSelectedItem();
@@ -278,7 +278,6 @@ public class Forum extends Application {
                     grid.getChildren().remove(input);
                     grid.getChildren().remove(btnEnvoyer);
                     grid.getChildren().remove(btnDisabon);
-                    grid.getChildren().remove(btnsuppr);
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -294,32 +293,7 @@ public class Forum extends Application {
 				}
             }
           });
-      //Bouton + mÃ©thode pour la desinscription Ã  un tchat
-        btnsuppr.setOnAction((ActionEvent event) -> {
-        	 String potential = listInscrits.getSelectionModel().getSelectedItem();
-             try {
-                 if (selectedTopic.getName().equals(potential)) {
-                     grid.getChildren().remove(channelName);
-                     grid.getChildren().remove(output);
-                     grid.getChildren().remove(input);
-                     grid.getChildren().remove(btnEnvoyer);
-                     grid.getChildren().remove(btnDisabon);
-                     grid.getChildren().remove(btnsuppr);
-                 }
-             } catch (RemoteException e) {
-                 e.printStackTrace();
-             }
-             if (potential != null) {
-             	try {
- 					server.topicDeleted(client, server.getTopic(potential));
- 					listInscrits.getSelectionModel().clearSelection();
- 	            	listInscritsItems.remove(potential);
- 				} catch (Exception e) {
- 					// TODO Auto-generated catch block
- 					e.printStackTrace();
- 				}
-             }
-           });
+
 
         channelName.setId("Topic");
         grid.add(channelName, 1,2);
@@ -327,7 +301,6 @@ public class Forum extends Application {
       	grid.add(input,1,8,1,8);
       	grid.add(btnEnvoyer,2,8,10,8);
         grid.add(btnDisabon, 0,6);
-        grid.add(btnsuppr, 0,8); 
 
 	}
     
