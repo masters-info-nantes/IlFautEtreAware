@@ -35,6 +35,11 @@ public class Client extends UnicastRemoteObject implements IClient, Serializable
     }
 
     @Override
+    public void removeTopic(ITopic topic) throws RemoteException {
+        forum.removeTopic(topic.getName());
+    }
+
+    @Override
     public String getName() throws RemoteException {
         return name;
     }

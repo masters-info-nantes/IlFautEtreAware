@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 public interface IClient extends Remote {
     public void newMessage(Message message, String topic) throws RemoteException;
     public void newTopic(ITopic topicName) throws RemoteException;
+    public void removeTopic(ITopic topic) throws RemoteException;
     public String getName() throws RemoteException;
     public void addSubscribedTopic(ITopic topic) throws RemoteException;
     public void removeSubscribedTopic(ITopic topic) throws RemoteException;

@@ -51,6 +51,7 @@ public class Forum extends Application {
     private ListView<String> listDispo;
     private ObservableList<String> listInscritsItems;
     private ObservableList<String> listDispoItems;
+    Button btnsuppr = new Button();
     Button btnDisabon = new Button();
     
     public void start(Stage primaryStage) throws RemoteException {
@@ -78,7 +79,7 @@ public class Forum extends Application {
         	}
         });
         
-        Text identifiants = new Text("Bonjour à toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
+        Text identifiants = new Text("Bonjour à  toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
         identifiants.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         identifiants.setId("welcome-text");
         
@@ -265,7 +266,7 @@ public class Forum extends Application {
     	}
 
 
-
+        btnsuppr.setText("Supprimer le thème");
 
         //Bouton + mÃ©thode pour la desinscription Ã  un tchat
         btnDisabon.setText("Se désabonner");
@@ -278,6 +279,7 @@ public class Forum extends Application {
                     grid.getChildren().remove(input);
                     grid.getChildren().remove(btnEnvoyer);
                     grid.getChildren().remove(btnDisabon);
+                    grid.getChildren().remove(btnsuppr);
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -293,7 +295,15 @@ public class Forum extends Application {
 				}
             }
           });
-
+      //Bouton + mÃ©thode pour la suppression d' un tchat
+        btnsuppr.setOnAction((ActionEvent event) -> {
+            String potential = listInscrits.getSelectionModel().getSelectedItem();
+            try {
+                server.removeTopic(selectedTopic);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        });
 
         channelName.setId("Topic");
         grid.add(channelName, 1,2);
@@ -301,6 +311,7 @@ public class Forum extends Application {
       	grid.add(input,1,8,1,8);
       	grid.add(btnEnvoyer,2,8,10,8);
         grid.add(btnDisabon, 0,6);
+        grid.add(btnsuppr, 0,8); 
 
 	}
     
@@ -365,6 +376,31 @@ public class Forum extends Application {
 
     public void newTopic(String topic) {
         listDispoItems.add(topic);
+    }
+
+    public void removeTopic(String topic) {
+            try {
+                if (selectedTopic.getName().equals(topic)) {
+                    grid.getChildren().remove(channelName);
+                    grid.getChildren().remove(output);
+                    grid.getChildren().remove(input);
+                    grid.getChildren().remove(btnEnvoyer);
+                    grid.getChildren().remove(btnDisabon);
+                    grid.getChildren().remove(btnsuppr);
+                    listInscrits.getSelectionModel().clearSelection();
+                }
+
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        if (topic != null) {
+            try {
+                listInscritsItems.remove(topic);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
     
     protected void windowNewTopic(Stage primaryStage, Stage secondStage) {    	

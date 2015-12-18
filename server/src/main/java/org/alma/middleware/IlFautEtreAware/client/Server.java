@@ -83,6 +83,17 @@ public class Server extends UnicastRemoteObject implements IServer, Serializable
         client.removeSubscribedTopic(t);
         System.out.println("[Server] Unsubscribe topic "+t.getName()+" : "+client.getName());
     }
+    public void removeTopic(ITopic t) throws RemoteException {
+        Topic topic = (Topic) topics.get(t.getName());
+
+        for(IClient c : clients) {
+            c.removeTopic(t);
+        }
+            this.dbTopics.remove(topic.getName());
+            topics.remove(topic.getName());
+
+        System.out.println("[Server] Topic "+t.getName()+" deleted");
+    }
 
     public void createTopic (IClient client, String name) throws RemoteException {
         Topic t = new Topic(name, db);
