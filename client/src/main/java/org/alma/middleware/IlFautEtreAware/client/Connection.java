@@ -51,7 +51,7 @@ public class Connection extends Application {
         scene.getStylesheets().add
                 ("/css/application.css");
 
-        Text scenetitle = new Text("Bienvenue à  toi, à  moi, à  tous");
+        Text scenetitle = new Text("Bienvenue à toi, à moi, à tous");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 

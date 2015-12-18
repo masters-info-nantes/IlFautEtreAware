@@ -77,7 +77,7 @@ public class Forum extends Application {
         	}
         });
         
-        Text identifiants = new Text("Bonjour à  toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
+        Text identifiants = new Text("Bonjour à toi "+ Identifiants +" dans la galaxie de la question qu'est le forum!");
         identifiants.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         identifiants.setId("welcome-text");
         
